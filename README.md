@@ -1,11 +1,11 @@
-# contao-google-jobposting-bundle
+# contao-jobposting-bundle
 **JobPosting Markup Generator**
 
 ## Installation
 1. Ergänzen Sie als _letzten_ Eintrag im Bereich "require" diese Zeile
 ```
     "require": {
-        "do-while/contao-google-jobposting-bundle": "^1.0"
+        "do-while/contao-jobposting-bundle": "^1.0"
     }
 ```
 1. Dann rufen Sie den Composer mit `composer update` auf oder Sie rufen den **Contao Manager** auf.
@@ -24,7 +24,7 @@ Das Element können Sie wie gewohnt im Artikel einsetzen. Es trägt in dem Artik
 
 
 **Problem melden | *Report Problem*:**<br>
-https://github.com/do-while/contao-google-jobposting-bundle/issues
+https://github.com/do-while/contao-jobposting-bundle/issues
 
 ___
 Softleister - 2019-08-18
