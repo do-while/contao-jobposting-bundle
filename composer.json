@@ -1,0 +1,36 @@
+{
+    "name": "do-while/contao-jobposting-bundle",
+    "description": "JobPosting Markup Generator",
+    "keywords": ["contao", "contentelement", "jobposting", "google-for-jobs", "jobs"],
+    "type": "contao-bundle",
+    "homepage": "https://www.softleister.de",
+    "license": "LGPL-3.0+",
+    "authors": [{
+        "name": "Softleister - Hagen Klemp",
+        "homepage": "https://www.softleister.de",
+        "role": "Developer"
+    }],
+    "support": {
+        "email": "info@softleister.de"
+    },
+    "require": {
+        "php": ">=7.1",
+        "contao/core-bundle": "~4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Softleister\\JobpostingBundle\\": "src/"
+        },
+        "classmap": [
+            "src/Resources/contao/"
+        ],
+        "exclude-from-classmap": [
+            "src/Resources/contao/config/",
+            "src/Resources/contao/dca/",
+            "src/Resources/contao/languages/"
+        ]
+    },
+    "extra": {
+		"contao-manager-plugin": "Softleister\\JobpostingBundle\\ContaoManager\\Plugin"
+    }
+}

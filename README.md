@@ -12,19 +12,15 @@
 
 
 ## JobPosting Markup
-Nach der Installation steht Ihnen das neue Contentelement "JobPosting Markup" zur Verfügung. 
-Das Element können Sie wie gewohnt im Artikel einsetzen. Es trägt in dem Artikel das JSON-Snippet mit den Job-Informationen ein.
-
-
-
-
+Nach der Installation steht Ihnen das neue Contentelement "**JobPosting Markup**" im Bereich "include-Elemente" zur Verfügung. 
+Das Element können Sie wie gewohnt im Artikel einsetzen. Es trägt in dem <head>-Bereich der Seite das JSON-Snippet mit den angegebenen Job-Informationen ein. Der Eintrag ist nur im Quellcode der Seite sichtbar.
 
 ## Version
-* 1.0.0<br>Erstversion: 2019-08-18<br>Version für Contao ab Version 4.4 LTS
+* 1.0.0<br>Erstversion: 2019-08-19<br>Version für Contao ab Version 4.4 LTS
 
 
 **Problem melden | *Report Problem*:**<br>
 https://github.com/do-while/contao-jobposting-bundle/issues
 
 ___
-Softleister - 2019-08-18
+Softleister - 2019-08-19

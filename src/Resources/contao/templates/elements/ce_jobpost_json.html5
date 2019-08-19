@@ -1,0 +1,51 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "JobPosting",
+  "title": "<?= $this->headline['value'] ?>",
+  "description": "<?= str_replace('"', '&quot;', $this->jobposting['text']) ?>",
+  "identifier": {
+    "@type": "PropertyValue",
+    "name": "<?= $this->jobposting['jobCompany'] ?>",
+    "value": "<?= $this->jobposting['jobIdent'] ?>"
+  },
+  "hiringOrganization" : {
+    "@type": "Organization",
+    "name": "<?= $this->jobposting['jobCompany'] ?>"<?php if( $this->jobposting['url'] ): ?>,
+    "sameAs": "<?= $this->jobposting['url'] ?>"<?php endif; ?>
+  }<?php if( $this->jobEmptype ): ?>,
+  "employmentType": "<?= $this->jobEmptype ?>"<?php endif; ?><?php if( $this->jobposting['jobWorkHours'] ): ?>,
+  "workHours": "<?= $this->jobposting['jobWorkHours'] ?>"<?php endif; ?>,
+  "datePosted": "<?= date('Y-m-d', $this->datePosted) ?>",
+  "validThrough": "<?php if( $this->jobposting['stop'] ): ?><?= date('Y-m-d', $this->jobposting['stop']) ?><?php endif; ?>"<?php if( !$this->jobposting['jobRemote'] ): ?>,
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "<?= $this->jobposting['jobStreet'] ?>",
+      "addressLocality": "<?= $this->jobposting['jobCity'] ?>",
+      "postalCode": "<?= $this->jobposting['jobPostal'] ?>",
+      "addressCountry": "<?= strtoupper($this->jobposting['jobCountry']) ?>"
+    }
+  }<?php endif; ?><?php if( $this->jobposting['jobRemote'] ): ?>,
+  "applicantLocationRequirements": {
+    "@type": "Country",
+    "name": "<?= strtoupper($this->jobposting['jobCountry']) ?>"
+  },
+  "jobLocationType": "TELECOMMUTE"<?php endif; ?><?php if( $this->jobposting['jobSalary'] ): ?>,
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "EUR",
+    "value": {
+      "@type": "QuantitativeValue",
+      "value": <?= $this->jobposting['jobSalary'] ?>,
+      "unitText": "<?= $this->jobposting['jobInterval'] ?>"
+    }
+  }<?php endif; ?><?php if( $this->jobposting['jobRespon'] ): ?>,
+  "responsibilities": "<?= $this->jobposting['jobRespon'] ?>"<?php endif; ?><?php if( $this->jobposting['jobSkills'] ): ?>,
+  "skills": "<?= $this->jobposting['jobSkills'] ?>"<?php endif; ?><?php if( $this->jobposting['jobQuali'] ): ?>,
+  "qualifications": "<?= $this->jobposting['jobQuali'] ?>"<?php endif; ?><?php if( $this->jobposting['jobEdu'] ): ?>,
+  "educationRequirements": "<?= $this->jobposting['jobEdu'] ?>"<?php endif; ?><?php if( $this->jobposting['jobExp'] ): ?>,
+  "experienceRequirements": "<?= $this->jobposting['jobExp'] ?>"<?php endif; ?>
+}
+</script>
