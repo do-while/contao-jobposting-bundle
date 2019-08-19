@@ -1,5 +1,5 @@
 # contao-jobposting-bundle
-**JobPosting Markup Generator**
+**JobPosting Markup Generator**, z.B. für "Google for Jobs"
 
 ## Installation
 1. Ergänzen Sie als _letzten_ Eintrag im Bereich "require" diese Zeile
@@ -13,7 +13,7 @@
 
 ## JobPosting Markup
 Nach der Installation steht Ihnen das neue Contentelement "**JobPosting Markup**" im Bereich "include-Elemente" zur Verfügung. 
-Das Element können Sie wie gewohnt im Artikel einsetzen. Es trägt in dem <head>-Bereich der Seite das JSON-Snippet mit den angegebenen Job-Informationen ein. Der Eintrag ist nur im Quellcode der Seite sichtbar.
+Das Element können Sie wie gewohnt im Artikel einsetzen. Es trägt in dem head-Bereich der Seite das JSON-Snippet mit den angegebenen Job-Informationen ein. Der Eintrag ist nur im Quellcode der Seite sichtbar.
 
 ## Version
 * 1.0.0<br>Erstversion: 2019-08-19<br>Version für Contao ab Version 4.4 LTS
