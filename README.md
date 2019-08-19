@@ -8,7 +8,7 @@
         "do-while/contao-jobposting-bundle": "^1.0"
     }
 ```
-1. Dann rufen Sie den Composer mit `composer update` auf oder Sie rufen den **Contao Manager** auf.
+2. Dann rufen Sie den Composer mit `composer update` auf oder Sie rufen den **Contao Manager** auf.
 
 
 ## JobPosting Markup
