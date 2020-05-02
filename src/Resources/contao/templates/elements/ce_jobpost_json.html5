@@ -1,3 +1,4 @@
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -12,7 +13,8 @@
   "hiringOrganization" : {
     "@type": "Organization",
     "name": "<?= $this->jobposting['jobCompany'] ?>"<?php if( $this->jobposting['url'] ): ?>,
-    "sameAs": "<?= $this->jobposting['url'] ?>"<?php endif; ?>
+    "sameAs": "<?= $this->jobposting['url'] ?>"<?php endif; ?><?php if( $this->logo ): ?>,
+    "logo": "<?= $this->logo ?>"<?php endif; ?>
   }<?php if( $this->jobEmptype ): ?>,
   "employmentType": "<?= $this->jobEmptype ?>"<?php endif; ?><?php if( $this->jobposting['jobWorkHours'] ): ?>,
   "workHours": "<?= $this->jobposting['jobWorkHours'] ?>"<?php endif; ?>,
@@ -23,7 +25,8 @@
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "<?= $this->jobposting['jobStreet'] ?>",
-      "addressLocality": "<?= $this->jobposting['jobCity'] ?>",
+      "addressLocality": "<?= $this->jobposting['jobCity'] ?>"<?php if( $this->jobposting['jobRegion'] ): ?>,
+      "addressRegion": "<?= $this->jobposting['jobRegion'] ?>"<?php endif; ?>,
       "postalCode": "<?= $this->jobposting['jobPostal'] ?>",
       "addressCountry": "<?= strtoupper($this->jobposting['jobCountry']) ?>"
     }

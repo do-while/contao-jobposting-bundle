@@ -3,7 +3,7 @@
 /**
  * Extension for Contao 4
  *
- * @copyright  Softleister 2019
+ * @copyright  Softleister 2019-2020
  * @author     Softleister <info@softleister.de>
  * @package    contao-jobposting-bundle
  * @licence    LGPL-3.0
@@ -14,11 +14,13 @@
  */
 $GLOBALS['TL_LANG']['tl_content']['jobIdent']     = array('Identifier', 'The hiring organization\'s unique identifier for the job.');
 $GLOBALS['TL_LANG']['tl_content']['jobCompany']   = array('Company', 'Name of company');
+$GLOBALS['TL_LANG']['tl_content']['jobLogo']      = array('Company logo', 'Logo representing the organisation, min. 112x112 pixels, format: jpg, png or gif');
 $GLOBALS['TL_LANG']['tl_content']['jobEmptype']   = array('Employment type', 'You can also specify several employment types.');
 $GLOBALS['TL_LANG']['tl_content']['jobWorkHours'] = array('Work hours', 'e.g. 8am-5pm, shift');
 $GLOBALS['TL_LANG']['tl_content']['jobPostal']    = array('Postal', 'Enter the postal code.');
 $GLOBALS['TL_LANG']['tl_content']['jobCity']      = array('City', 'Enter the place of employment.');
 $GLOBALS['TL_LANG']['tl_content']['jobStreet']    = array('Street', 'Enter the street of employment.');
+$GLOBALS['TL_LANG']['tl_content']['jobRegion']    = array('Region', 'Enter the region of employment, e.g. federal state.');
 $GLOBALS['TL_LANG']['tl_content']['jobCountry']   = array('Country', 'Select the country of employment.');
 $GLOBALS['TL_LANG']['tl_content']['jobRemote']    = array('Remote job', 'It must be entirely telework. It must not be used for jobs that can occasionally be done from home, where homework can be negotiated, or which do not include 100% telework for other reasons.');
 $GLOBALS['TL_LANG']['tl_content']['jobSalary']    = array('Base salary', 'The actual basic salary for the job as stated by the employer (no estimate).');

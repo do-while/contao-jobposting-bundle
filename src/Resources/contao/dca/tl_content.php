@@ -3,7 +3,7 @@
 /**
  * Extension for Contao 4
  *
- * @copyright  Softleister 2019
+ * @copyright  Softleister 2019-2020
  * @author     Softleister <info@softleister.de>
  * @package    contao-jobposting-bundle
  * @licence    LGPL-3.0
@@ -13,7 +13,7 @@
 /**
  * Callbacks
  */
-$GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = array('tl_content_jobposting', 'updateJson');
+$GLOBALS['TL_DCA']['tl_content']['config']['oncreate_version_callback'][] = array('tl_content_jobposting', 'updateJson');
 
 
 /**
@@ -21,8 +21,8 @@ $GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = array('tl_co
  */
  $GLOBALS['TL_DCA']['tl_content']['palettes']['jobposting'] = '{type_legend},type,headline,jobIdent;'
                                                              .'{desc_legend},text;'
-                                                             .'{company_legend},jobCompany,url;'
-                                                             .'{job_legend},jobEmptype,jobWorkHours,jobPostal,jobCity,jobStreet,jobCountry,jobRemote;'
+                                                             .'{company_legend},jobCompany,url,jobLogo;'
+                                                             .'{job_legend},jobEmptype,jobWorkHours,jobPostal,jobCity,jobStreet,jobRegion,jobCountry,jobRemote;'
 															 .'{salary_legend},jobSalary,jobInterval;'
 															 .'{conditions_legend},jobRespon,jobSkills,jobQuali,jobEdu,jobExp;'
 															 .'{code_legend:hide},jobJson;'
@@ -52,6 +52,15 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['jobCompany'] = array
             'inputType'               => 'text',
             'eval'                    => array('maxlength'=>64, 'tl_class'=>'w50'),
             'sql'                     => "varchar(64) NOT NULL default ''"
+        );
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['jobLogo'] = array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_content']['jobLogo'],
+			'exclude'                 => true,
+			'inputType'               => 'fileTree',
+			'eval'                    => array('fieldType'=>'radio', 'filesOnly'=>true, 'isGallery'=>true, 'extensions'=>'jpg,jpeg,gif,png', 'tl_class'=>'clr m12'),
+			'sql'                     => "binary(16) NULL"
         );
 
 //-------
@@ -103,6 +112,16 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['jobStreet'] = array
 			'search'                  => true,
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+        );
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['jobRegion'] = array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['jobRegion'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'clr w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
         );
 
@@ -223,40 +242,37 @@ class tl_content_jobposting extends \Backend
     //-----------------------------------------------------------------
     //  Update JSON - Snippet
     //-----------------------------------------------------------------
-	public function updateJson( $dc )
+	public function updateJson( $strTable, $intPid, $intVersion, $row  )
 	{
-		// Return if there is no active record (override all)
-		if( !$dc->activeRecord ) {
-			return;
-		}
-
-		$objCte = ContentModel::findByPk( $dc->id );
-
-		if( ($objCte === null) || ($objCte->type !== 'jobposting') ) {
+		// Return if content type is not 'jobposting'
+		if( $row['type'] !== 'jobposting' ) {
 			return;
 		}
 
 		$arrSet = array();
-		if( empty( $objCte->start ) ) {												// Startdatum wird als datePosted gesetzt, wenn leer
+		if( empty( $row['start'] ) ) {												// Startdatum wird als datePosted gesetzt, wenn leer
 			$arrSet['start'] = time();
 		}
 
 		// Template vorbereiten
         $this->Template = new \FrontendTemplate( 'ce_jobpost_json' );
-		$this->Template->jobposting = $objCte->row();								// Alle Spalten ins Template übernehmen
+		$this->Template->jobposting = $row;											// Alle Spalten ins Template übernehmen
 
-		$this->Template->headline = \StringUtil::deserialize( $objCte->headline );	// Einige Daten aufbereiten
-		$this->Template->cssID = \StringUtil::deserialize( $objCte->cssID );
-		$arrEmp = \StringUtil::deserialize( $objCte->jobEmptype );
+		$this->Template->headline = \StringUtil::deserialize( $row['headline'] );	// Einige Daten aufbereiten
+		$this->Template->cssID = \StringUtil::deserialize( $row['cssID'] );
+		$arrEmp = \StringUtil::deserialize( $row['jobEmptype'] );
 		$this->Template->jobEmptype = implode( ',', $arrEmp );
 
-		$this->Template->datePosted = empty( $objCte->start ) ? $arrSet['start'] : $objCte->start;
+		$logo = \FilesModel::findByUuid( $row['jobLogo'] )->path;					// URL aus Logo
+		if( !empty($logo) ) {
+			$this->Template->logo = \Environment::get('base') . $logo;
+		}
+
+		$this->Template->datePosted = empty( $row['start'] ) ? $arrSet['start'] : $row['start'];
 
 		// Template parsen, InsertTags ersetzen und mit dem Datensatz speichern
         $arrSet['jobJson'] = \Controller::replaceInsertTags( $this->Template->parse(), false );
-		$this->Database->prepare( "UPDATE tl_content %s WHERE id=?" )->set( $arrSet )->execute( $dc->id );
-
-		return;
+		$this->Database->prepare( "UPDATE tl_content %s WHERE id=?" )->set( $arrSet )->execute( $intPid );
 	}
 
 
