@@ -11,23 +11,25 @@
         "role": "Developer"
     }],
     "support": {
-        "email": "info@softleister.de"
+        "issues": "https://github.com/do-while/contao-jobposting-bundle/issues",
+        "source": "https://github.com/do-while/contao-jobposting-bundle"
     },
     "require": {
-        "php": ">=7.1",
-        "contao/core-bundle": "~4.4"
+        "php": "^8.2",
+        "contao/core-bundle": "^5.3"
     },
     "autoload": {
         "psr-4": {
             "Softleister\\JobpostingBundle\\": "src/"
         },
         "classmap": [
-            "src/Resources/contao/"
+            "contao/"
         ],
         "exclude-from-classmap": [
-            "src/Resources/contao/config/",
-            "src/Resources/contao/dca/",
-            "src/Resources/contao/languages/"
+            "contao/config/",
+            "contao/dca/",
+            "contao/languages/",
+            "contao/templates/"
         ]
     },
     "extra": {

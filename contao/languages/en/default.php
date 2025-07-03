@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Extension for Contao 4
+ * Extension for Contao 5
  *
- * @copyright  Softleister 2019
+ * @copyright  Softleister 2019-2025
  * @author     Softleister <info@softleister.de>
  * @package    contao-jobposting-bundle
  * @licence    LGPL-3.0
